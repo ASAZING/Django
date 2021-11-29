@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import login as lg #logear
 from django.contrib.auth import authenticate #verificar usuario
 
-def saludo(request):
+def home(request):
     return render(request, 'index.html', {
         'mensaje' : 'FELICITACIONES',
         'nonmbre' : 'matias',
@@ -21,7 +21,6 @@ def saludo(request):
             {'nombre' : 'monitor', 'caracteristicas': '', 'precio' : 600000, 'img': 'monitor.jpg'},
         ]
     })
-    return HttpResponse("hola")
     
 def saludo2(request):
     return render(request, 'index.html', {
