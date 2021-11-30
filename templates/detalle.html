@@ -1,0 +1,22 @@
+{%extends 'plantilla.html'%}
+{% load static %}
+{%block 'titulo'%}
+Detalle Producto
+{%endblock%}
+{%block 'content'%}
+<center>
+    <div class="row">
+        <div class="card" style="width: 18rem;">
+            <img src="/{{producto.imagen}}" class="card-img-top" alt="{{product.name}}" width="20%" height="50%">
+            <div class="card-body">
+                <h5 class="card-title">{{producto.name}}</h5>
+                <p class="card-text">{{producto.description}}</p>
+                <p class="card-text">Precion :{{producto.price}}</p>
+                <p class="card-text">Cantidad :{{producto.quantity}}</p>
+                <a href="{%url 'home'%}" class="btn btn-primary">Ir a la tienda</a>
+            </div>
+        </div>
+    </div>
+</center>
+
+{%endblock%}

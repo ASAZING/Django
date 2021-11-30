@@ -1,81 +1,52 @@
+{%extends 'plantilla.html'%}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Productos</title>
-  <link rel="stylesheet" href="{% static "css/style.css" %}">
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
-</head>
-
-<body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top ">
-    <a class="navbar-brand" href="#">TIENDA OLNINE</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="{% url 'productos' %}">Productos</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Contactanos</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'login' %}">Salir</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-  <br>
-  <br>
-  <table id="myTable" class="display table nowrap" style="width:100%">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>First name</th>
-            <th>Last name</th>
-            <th>ZIP / Post code</th>
-            <th>Country</th>
-        </tr>
-    </thead>
+{%block 'titulo'%}
+Productos
+{%endblock%}
+{%block 'content'%}
+<table id="myTable" class="display table nowrap" style="width:100%">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Descripción</th>
+      <th>Precio</th>
+      <th>Cantidad</th>
+      <th>Accion</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for producto in productos %}
+    <tr>
+      <td>{{producto.id}}</td>
+      <td>{{producto.name}}</td>
+      <td>{{producto.description}}</td>
+      <td>{{producto.price}}</td>
+      <td>{{producto.quantity}}</td>
+      <td><a href="{% url 'detalle' id_product=producto.pk %}">Detalle</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
-  <br>
-  <div class="container mt-5">
-    <div class="card-group">
-      {% for producto in productos %}
-      <div class="card">
-        <img class="card-img-top" src="/{{producto.imagen}}" alt="{{producto.name}}" width="20%" height="50%" />
-        <div class="card-body">
-          <h5 class="card-title">{{producto.name}} - ${{producto.price}}</h5>
-          <p class="card-text">
-            {{producto.description}}
-          </p>
-          <p class="card-text">
-            <small class="text-muted">Publicado {{producto.created_at}}</small>
-          </p>
-        </div>
+<br>
+<div class="container mt-5">
+  <div class="card-group">
+    {% for producto in productos %}
+    <div class="card">
+      <img class="card-img-top" src="/{{producto.imagen}}" alt="{{producto.name}}" width="20%" height="50%" />
+      <div class="card-body">
+        <h5 class="card-title">{{producto.name}} - ${{producto.price}}</h5>
+        <p class="card-text">
+          {{producto.description}}
+        </p>
+        <p class="card-text">
+          <small class="text-muted">Publicado {{producto.created_at}}</small>
+        </p>
       </div>
-      {%endfor%}
     </div>
-    <div>
-      <p>{{varible}}</p>
-    </div>
-</body>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"
-  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-<script>
-  $(document).ready(function () {
-    $('#myTable').DataTable();
-  });
-</script>
-</html>
+    {%endfor%}
+  </div>
+  <div>
+    <p>{{varible}}</p>
+  </div>
+{%endblock%}
